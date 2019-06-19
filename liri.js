@@ -35,7 +35,8 @@ const liri = function() {
         {
             type: "input",
             message: "What would you like search?",
-            name: "search"
+            name: "search",
+            default: "mr nobody"
         },
 
     ]).then(function(user) {
@@ -138,15 +139,15 @@ const liri = function() {
             console.log(`Song Details`)
         } else if (user.choice === 'movie-this') {
             // if chose to search a movie
-            if (user.search === "") {
-                searchInput = 'mr nobody';
-                getMovieInfo();
-                console.log(`Movie Details`)
-            } else {
-                getMovieInfo();
-                // console.log(searchInput);
-                console.log(`Movie Details`)
-            }
+            // if (user.search == undefined) {
+            //     searchInput = 'mr nobody';
+            //     getMovieInfo();
+            //     console.log(`Movie Details`)
+            // } else {
+            getMovieInfo();
+            // console.log(searchInput);
+            console.log(`Movie Details`)
+                // }
         }
 
 
