@@ -1,4 +1,4 @@
-console.log('this is loaded');
+console.log('keys.js - this is loaded');
 
 module.exports = {
     SPOTIFY_ID: process.env.SPOTIFY_ID,
