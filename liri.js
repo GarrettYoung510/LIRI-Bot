@@ -1,11 +1,11 @@
-const dotenv = require("dotenv").config();
+require("dotenv").config();
 // // require dotenv or .env
 // // code to read and set any environment variables with the dotenv package
 
 const axios = require("axios");
 // // require axios
 
-const keys = require("./keys");
+const keys = require("./keys.js");
 // // require import of keys.js file
 
 const inquirer = require("inquirer");
@@ -14,6 +14,8 @@ const inquirer = require("inquirer");
 const moment = require('moment');
 // moment
 moment().format();
+
+
 
 // var userRequest = process.argv.slice(2).join(" ");
 
@@ -48,6 +50,7 @@ const liri = function() {
         let queryURLConcert = (`https://rest.bandsintown.com/artists/${searchInput}/events?app_id=codingbootcamp`);
 
         const getConcertInfo = async function() {
+
             try {
                 const response = await axios.get(queryURLConcert);
                 // PULLS response:
@@ -63,47 +66,87 @@ const liri = function() {
                 console.log(e);
             }
         };
+
         const getSpotifyInfo = async function() {
+            // spotify
+            const Spotify = require('node-spotify-api');
             const spotify = new Spotify(keys.spotify);
             var options = {
                 provider: "spotify",
                 apiKey: spotify
             }
+            spotify.search({ type: 'track', query: searchInput }, function(err, data) {
+                if (err) {
+                    return console.log('Error occurred: ' + err);
+                }
+                console.log(data);
+            });
+
+            // PULLS response:
+
+            // artist(s)
+
+            // the song's name
+
+            // a preview link of the song from Spotify
+
+            // the album that the song is from
+
+            // if no song provided default to "The Sign" by Ace of Base
+
+        };
+
+        let queryURLMovie = (`http://www.omdbapi.com/?t=${searchInput}&y=&plot=short&apikey=trilogy`);
+
+        const getMovieInfo = async function() {
             try {
-                const response = await axios.get(queryURLConcert);
+                const response = await axios.get(queryURLMovie);
                 // PULLS response:
-                console.log(JSON.stringify(response.data[0].venue.name));
-                // name of the venue
-                console.log(`${response.data[0].venue.city},${response.data[0].venue.region}`);
-                // venue location
-                // console.log(`${response.data[0].datetime}`);
-                StartDate = moment(response.data[0].datetime).format('MM-DD-YYYY');
-                console.log(StartDate);
-                // date of the event using moment to format as "MM/DD/YYYY"
+                // pulls:
+                console.log("Title: " + response.data.Title);
+                // Title of the movie
+                console.log("Year released: " + response.data.Year);
+                // Year the movie came out
+                console.log("Rated: " + response.data.Rated);
+                // IMDB Rating of the movie
+                console.log(response.data.Ratings[1].Source + ": " + response.data.Ratings[1].Value);
+                // Rotten tomatoes rating of the movie
+                console.log("Country: " + response.data.Country);
+                // country where the movie was produced
+                console.log("Language(s): " + response.data.Language);
+                // language of the movie
+                console.log("Plot: " + response.data.Plot);
+                // plot of the movie
+                console.log("Actors: " + response.data.Actors);
+                // actors in the movie
 
-
-                // spotify-this-song <song name here>
-                // PULLS:
-                // artist(s)
-                // the song's name
-                // a preview link of the song from Spotify
-                // the album that the song is from
-                // if no song provided default to "The Sign" by Ace of Base
+                // IF user does not type in movie output data for "Mr. Nobody"
+                // display message if you have not watched mr nobody you should
+                // it is on netflix!
+                // use axios package to retrieve data from the OMDB API
+                // use the trilogy api
             } catch (e) {
                 console.log(e);
             }
         };
 
         if (user.choice === 'concert-this') {
-            console.log(`you chose concert-this`);
+            console.log(`Concert Details`);
             getConcertInfo();
-            // const response = axios.get(`https://rest.bandsintown.com/artists/${searchInput}/events?app_id=codingbootcamp`);
-            // console.log(response.data);
         } else if (user.choice === 'spotify-this-song') {
             getSpotifyInfo();
-            console.log(`you chose spotify-this-song`)
+            console.log(`Song Details`)
         } else if (user.choice === 'movie-this') {
-            console.log(`you chose movie-this`)
+            // if chose to search a movie
+            if (user.search === "") {
+                searchInput = 'mr nobody';
+                getMovieInfo();
+                console.log(`Movie Details`)
+            } else {
+                getMovieInfo();
+                // console.log(searchInput);
+                console.log(`Movie Details`)
+            }
         }
 
 
@@ -115,21 +158,7 @@ liri();
 
 
 
-// movie-this <movie name here>
-// pulls:
-// Title of the movie
-// Year the movie came out
-// IMDB Rating of the movie
-// Rotten tomatoes rating of the movie
-// country where the movie was produced
-// language of the movie
-// plot of the movie
-// actors in the movie
-// IF user does not type in movie output data for "Mr. Nobody"
-// display message if you have not watched mr nobody you should
-// it is on netflix!
-// use axios package to retrieve data from the OMDB API
-// use the trilogy api
+
 
 // do-what-it-says run one of the previous programs
 // using fs node package LIRI will take the text inside random.txt and use it 
