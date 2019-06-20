@@ -8,12 +8,23 @@ const axios = require("axios");
 const keys = require("./keys.js");
 // // require import of keys.js file
 
+var Spotify = require('node-spotify-api');
+const spotify = new Spotify(keys.spotify);
+// var spotify = new Spotify({ 
+//     id: defd70024dba40e9bd3a04faa3cd1fe6, 
+//     secret: 622e33b0a0f94fb8b6c074b4c1e416e6
+//         });
+
+// spotify
+console.log(spotify);
+
 const inquirer = require("inquirer");
 // inquirer
 
 const moment = require('moment');
 // moment
 moment().format();
+// brings in the function for formatting 
 
 
 
@@ -36,7 +47,21 @@ const liri = function() {
             type: "input",
             message: "What would you like search?",
             name: "search",
-            default: "mr nobody"
+            validate: function(user) {
+                // validate if user input something
+                if (user.choice === 'movie-this' && user.search === undefined) {
+                    // if user choice is movie this and input was blank
+
+                    user.search = 'mr nobody'
+                        // change the input to mr nobody
+                }
+                return true;
+            },
+            consolelog: function(user) {
+                if (user.choice !== "") {
+                    console.log(`this is what you searched: ${user.search}`);
+                }
+            }
         },
 
     ]).then(function(user) {
@@ -48,9 +73,9 @@ const liri = function() {
         console.log(searchInput);
         // pull user search term
 
-        let queryURLConcert = (`https://rest.bandsintown.com/artists/${searchInput}/events?app_id=codingbootcamp`);
 
         const getConcertInfo = async function() {
+            let queryURLConcert = (`https://rest.bandsintown.com/artists/${searchInput}/events?app_id=codingbootcamp`);
 
             try {
                 const response = await axios.get(queryURLConcert);
@@ -68,38 +93,39 @@ const liri = function() {
             }
         };
 
-        const getSpotifyInfo = async function() {
-            // spotify
-            const Spotify = require('node-spotify-api');
-            const spotify = new Spotify(keys.spotify);
-            var options = {
-                provider: "spotify",
-                apiKey: spotify
+        const getSpotifyInfo = function() {
+            if (searchInput.length < 0) {
+                searchInput === 'i want it that way'
             }
-            spotify.search({ type: 'track', query: searchInput }, function(err, data) {
-                if (err) {
-                    return console.log('Error occurred: ' + err);
-                }
-                console.log(data);
-            });
+            spotify.search({ type: 'track', query: searchInput, limit: 1 }).then(function(response) {
+                    // default the sign ace of base
+                    // PULLS response:
+                    console.log(JSON.stringify(response));
 
-            // PULLS response:
+                    // artist(s)
+                    console.log(`ARTIST: ${JSON.parse(response[0])}`);
+                    console.log(`ITEMS: ${response.tracks.items}`);
 
-            // artist(s)
+                    // the song's name
+                    console.log(`SONG NAME: ${response.album}`);
+                    console.log(`SONG NAME2: ${JSON.stringify(response.album)}`);
 
-            // the song's name
+                    // a preview link of the song from Spotify
 
-            // a preview link of the song from Spotify
+                    // the album that the song is from
 
-            // the album that the song is from
-
-            // if no song provided default to "The Sign" by Ace of Base
+                    // if no song provided default to "The Sign" by Ace of Base
+                })
+                .catch(function(err) {
+                    console.log(err);
+                });
 
         };
 
         let queryURLMovie = (`http://www.omdbapi.com/?t=${searchInput}&y=&plot=short&apikey=trilogy`);
 
         const getMovieInfo = async function() {
+
             try {
                 const response = await axios.get(queryURLMovie);
                 // PULLS response:
@@ -129,6 +155,7 @@ const liri = function() {
             } catch (e) {
                 console.log(e);
             }
+
         };
 
         if (user.choice === 'concert-this') {
