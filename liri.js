@@ -125,35 +125,65 @@ const liri = function() {
             let queryURLMovie = (`http://www.omdbapi.com/?t=${searchInput}&y=&plot=short&apikey=trilogy`);
             try {
                 if (searchInput === '') {
-                    // let queryURLMovie = (`http://www.omdbapi.com/?t=${searchInput}&y=&plot=short&apikey=trilogy`);
                     searchInput = 'mr nobody';
+                    // set searchinput to mr nobody
                     console.log(`This was the input ${searchInput}`);
-                }
-                const response = await axios.get(queryURLMovie);
-                // PULLS response:
-                // pulls:
-                console.log("Title: " + response.data.Title);
-                // Title of the movie
-                console.log("Year released: " + response.data.Year);
-                // Year the movie came out
-                console.log("Rated: " + response.data.Rated);
-                // IMDB Rating of the movie
-                console.log(response.data.Ratings[1].Source + ": " + response.data.Ratings[1].Value);
-                // Rotten tomatoes rating of the movie
-                console.log("Country: " + response.data.Country);
-                // country where the movie was produced
-                console.log("Language(s): " + response.data.Language);
-                // language of the movie
-                console.log("Plot: " + response.data.Plot);
-                // plot of the movie
-                console.log("Actors: " + response.data.Actors);
-                // actors in the movie
 
-                // IF user does not type in movie output data for "Mr. Nobody"
-                // display message if you have not watched mr nobody you should
-                // it is on netflix!
-                // use axios package to retrieve data from the OMDB API
-                // use the trilogy api
+                    let queryURLMovie = (`http://www.omdbapi.com/?t=${searchInput}&y=&plot=short&apikey=trilogy`);
+
+                    const response = await axios.get(queryURLMovie);
+                    // PULLS response:
+                    // pulls:
+                    console.log("Title: " + response.data.Title);
+                    // Title of the movie
+                    console.log("Year released: " + response.data.Year);
+                    // Year the movie came out
+                    console.log("Rated: " + response.data.Rated);
+                    // IMDB Rating of the movie
+                    console.log(response.data.Ratings[1].Source + ": " + response.data.Ratings[1].Value);
+                    // Rotten tomatoes rating of the movie
+                    console.log("Country: " + response.data.Country);
+                    // country where the movie was produced
+                    console.log("Language(s): " + response.data.Language);
+                    // language of the movie
+                    console.log("Plot: " + response.data.Plot);
+                    // plot of the movie
+                    console.log("Actors: " + response.data.Actors);
+                    // actors in the movie
+
+                    // IF user does not type in movie output data for "Mr. Nobody"
+                    // display message if you have not watched mr nobody you should
+                    // it is on netflix!
+                    // use axios package to retrieve data from the OMDB API
+                    // use the trilogy api
+                } else {
+
+                    const response = await axios.get(queryURLMovie);
+                    // PULLS response:
+                    // pulls:
+                    console.log("Title: " + response.data.Title);
+                    // Title of the movie
+                    console.log("Year released: " + response.data.Year);
+                    // Year the movie came out
+                    console.log("Rated: " + response.data.Rated);
+                    // IMDB Rating of the movie
+                    console.log(response.data.Ratings[1].Source + ": " + response.data.Ratings[1].Value);
+                    // Rotten tomatoes rating of the movie
+                    console.log("Country: " + response.data.Country);
+                    // country where the movie was produced
+                    console.log("Language(s): " + response.data.Language);
+                    // language of the movie
+                    console.log("Plot: " + response.data.Plot);
+                    // plot of the movie
+                    console.log("Actors: " + response.data.Actors);
+                    // actors in the movie
+
+                    // IF user does not type in movie output data for "Mr. Nobody"
+                    // display message if you have not watched mr nobody you should
+                    // it is on netflix!
+                    // use axios package to retrieve data from the OMDB API
+                    // use the trilogy api
+                }
             } catch (e) {
                 console.log(e);
             }
