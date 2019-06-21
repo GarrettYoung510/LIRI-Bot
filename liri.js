@@ -100,16 +100,16 @@ const liri = function() {
 
                         // artist(s)
                         // console.log(`ITEM QUERY: ${JSON.stringify(response.tracks.items[0])}`);
-                        console.log(`ARTIST: ${JSON.stringify(response.tracks.items[0].album.artists[0].name)}`);
+                        console.log(`Artist: ${JSON.stringify(response.tracks.items[0].album.artists[0].name)}`);
 
                         // the song's name
-                        console.log(`SONG NAME: ${JSON.stringify(response.tracks.items[0].name)}`);
+                        console.log(`Song Name: ${JSON.stringify(response.tracks.items[0].name)}`);
 
                         // a preview link of the song from Spotify
-                        console.log(`PREVIEW LINK: ${JSON.stringify(response.tracks.items[0].preview_url)}`);
+                        console.log(`Preview of the Song: ${JSON.stringify(response.tracks.items[0].preview_url)}`);
 
                         // the album that the song is from
-                        console.log(`ALBUM: ${JSON.stringify(response.tracks.items[0].album.name)}`);
+                        console.log(`Album: ${JSON.stringify(response.tracks.items[0].album.name)}`);
 
                         // if no song provided default to "The Sign" by Ace of Base
                     })
@@ -124,16 +124,16 @@ const liri = function() {
 
                         // artist(s)
                         // console.log(`ITEM QUERY: ${JSON.stringify(response.tracks.items[0])}`);
-                        console.log(`ARTIST: ${JSON.stringify(response.tracks.items[0].album.artists[0].name)}`);
+                        console.log(`Artist: ${JSON.stringify(response.tracks.items[0].album.artists[0].name)}`);
 
                         // the song's name
-                        console.log(`SONG NAME: ${JSON.stringify(response.tracks.items[0].name)}`);
+                        console.log(`Song Name: ${JSON.stringify(response.tracks.items[0].name)}`);
 
                         // a preview link of the song from Spotify
-                        console.log(`PREVIEW LINK: ${JSON.stringify(response.tracks.items[0].preview_url)}`);
+                        console.log(`Preview of Song: ${JSON.stringify(response.tracks.items[0].preview_url)}`);
 
                         // the album that the song is from
-                        console.log(`ALBUM: ${JSON.stringify(response.tracks.items[0].album.name)}`);
+                        console.log(`Album: ${JSON.stringify(response.tracks.items[0].album.name)}`);
 
                         // if no song provided default to "The Sign" by Ace of Base
                     })
