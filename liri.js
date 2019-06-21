@@ -90,9 +90,9 @@ const liri = function() {
         };
 
         const getSpotifyInfo = function() {
-            if (searchInput.length < 0) {
-                searchInput === 'i want it that way'
-            }
+            // if (searchInput.length < 0) {
+            //     searchInput === 'i want it that way'
+            // }
             spotify.search({ type: 'track', query: searchInput, limit: 1 }).then(function(response) {
                     // default the sign ace of base
                     // PULLS response:
@@ -119,11 +119,16 @@ const liri = function() {
 
         };
 
-        let queryURLMovie = (`http://www.omdbapi.com/?t=${searchInput}&y=&plot=short&apikey=trilogy`);
 
         const getMovieInfo = async function() {
 
+            let queryURLMovie = (`http://www.omdbapi.com/?t=${searchInput}&y=&plot=short&apikey=trilogy`);
             try {
+                if (searchInput === '') {
+                    // let queryURLMovie = (`http://www.omdbapi.com/?t=${searchInput}&y=&plot=short&apikey=trilogy`);
+                    searchInput = 'mr nobody';
+                    console.log(`This was the input ${searchInput}`);
+                }
                 const response = await axios.get(queryURLMovie);
                 // PULLS response:
                 // pulls:
@@ -176,21 +181,18 @@ const liri = function() {
 
                 user.choice = dataArr[0];
                 // do what it says
-
+                console.log(`${dataArr[0]}: ${dataArr[1]}`);
                 if (user.choice === 'concert-this') {
                     console.log(`Concert Details`);
-                    getConcertInfo(dataArr[1]);
+                    searchInput = dataArr[1];
+                    getConcertInfo();
                 } else if (user.choice === 'spotify-this-song') {
                     console.log(`Song Details`)
-                    getSpotifyInfo(dataArr[1]);
+                    searchInput = dataArr[1];
+                    getSpotifyInfo();
                 } else if (user.choice === 'movie-this') {
-                    // if chose to search a movie
-                    // if (user.search == undefined) {
-                    //     searchInput = 'mr nobody';
-                    //     getMovieInfo();
-                    //     console.log(`Movie Details`)
-                    // } else {
-                    getMovieInfo(dataArr[1]);
+                    searchInput = dataArr[1];
+                    getMovieInfo();
                     // console.log(searchInput);
                     console.log(`Movie Details`)
                         // }
