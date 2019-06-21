@@ -1,0 +1,29 @@
+{
+  "name": "LIRI-Bot",
+  "version": "1.0.0",
+  "main": "keys.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GarrettYoung510/LIRI-Bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GarrettYoung510/LIRI-Bot/issues"
+  },
+  "homepage": "https://github.com/GarrettYoung510/LIRI-Bot#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "dotenv": "^8.0.0",
+    "inquirer": "^6.3.1",
+    "moment": "^2.24.0",
+    "node-spotify-api": "^1.1.1",
+    "spotify": "^0.3.0"
+  },
+  "devDependencies": {},
+  "description": ""
+}
