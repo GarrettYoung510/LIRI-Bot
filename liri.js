@@ -90,33 +90,57 @@ const liri = function() {
         };
 
         const getSpotifyInfo = function() {
-            // if (searchInput.length < 0) {
-            //     searchInput === 'i want it that way'
-            // }
-            spotify.search({ type: 'track', query: searchInput, limit: 1 }).then(function(response) {
-                    // default the sign ace of base
-                    // PULLS response:
-                    // console.log(JSON.stringify(response));
+            if (searchInput === '') {
+                searchInput = 'The Sign by Ace of Base';
 
-                    // artist(s)
-                    // console.log(`ITEM QUERY: ${JSON.stringify(response.tracks.items[0])}`);
-                    console.log(`ARTIST: ${JSON.stringify(response.tracks.items[0].album.artists[0].name)}`);
+                spotify.search({ type: 'track', query: searchInput, limit: 1 }).then(function(response) {
+                        // default the sign ace of base
+                        // PULLS response:
+                        // console.log(JSON.stringify(response));
 
-                    // the song's name
-                    console.log(`SONG NAME: ${JSON.stringify(response.tracks.items[0].name)}`);
+                        // artist(s)
+                        // console.log(`ITEM QUERY: ${JSON.stringify(response.tracks.items[0])}`);
+                        console.log(`ARTIST: ${JSON.stringify(response.tracks.items[0].album.artists[0].name)}`);
 
-                    // a preview link of the song from Spotify
-                    console.log(`PREVIEW LINK: ${JSON.stringify(response.tracks.items[0].preview_url)}`);
+                        // the song's name
+                        console.log(`SONG NAME: ${JSON.stringify(response.tracks.items[0].name)}`);
 
-                    // the album that the song is from
-                    console.log(`ALBUM: ${JSON.stringify(response.tracks.items[0].album.name)}`);
+                        // a preview link of the song from Spotify
+                        console.log(`PREVIEW LINK: ${JSON.stringify(response.tracks.items[0].preview_url)}`);
 
-                    // if no song provided default to "The Sign" by Ace of Base
-                })
-                .catch(function(err) {
-                    console.log(err);
-                });
+                        // the album that the song is from
+                        console.log(`ALBUM: ${JSON.stringify(response.tracks.items[0].album.name)}`);
 
+                        // if no song provided default to "The Sign" by Ace of Base
+                    })
+                    .catch(function(err) {
+                        console.log(err);
+                    });
+            } else {
+                spotify.search({ type: 'track', query: searchInput, limit: 1 }).then(function(response) {
+                        // default the sign ace of base
+                        // PULLS response:
+                        // console.log(JSON.stringify(response));
+
+                        // artist(s)
+                        // console.log(`ITEM QUERY: ${JSON.stringify(response.tracks.items[0])}`);
+                        console.log(`ARTIST: ${JSON.stringify(response.tracks.items[0].album.artists[0].name)}`);
+
+                        // the song's name
+                        console.log(`SONG NAME: ${JSON.stringify(response.tracks.items[0].name)}`);
+
+                        // a preview link of the song from Spotify
+                        console.log(`PREVIEW LINK: ${JSON.stringify(response.tracks.items[0].preview_url)}`);
+
+                        // the album that the song is from
+                        console.log(`ALBUM: ${JSON.stringify(response.tracks.items[0].album.name)}`);
+
+                        // if no song provided default to "The Sign" by Ace of Base
+                    })
+                    .catch(function(err) {
+                        console.log(err);
+                    });
+            }
         };
 
 
